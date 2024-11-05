@@ -9,9 +9,11 @@ module example.persistence {
     requires spring.jdbc;
     requires spring.orm;
     requires spring.tx;
+    requires spring.boot.autoconfigure;
 
     exports red.jackal.training.spring.jpms.entity;
-    exports red.jackal.training.spring.jpms.repository to example.service, example.web;
+    exports red.jackal.training.spring.jpms.config to example.app;
+    exports red.jackal.training.spring.jpms.repository to example.service, example.web, example.app;
 
     opens red.jackal.training.spring.jpms.config to spring.core, spring.beans, spring.context;
     opens red.jackal.training.spring.jpms.entity to org.hibernate.orm.core, spring.core;

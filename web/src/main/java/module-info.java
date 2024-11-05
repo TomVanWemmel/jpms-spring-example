@@ -6,6 +6,7 @@ module example.web {
     requires spring.boot.autoconfigure;
     requires spring.beans;
     requires spring.web;
+    requires spring.context;
 
     exports red.jackal.training.spring.jpms.web.controller;
 
