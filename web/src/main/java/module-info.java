@@ -7,6 +7,7 @@ module example.web {
     requires spring.beans;
     requires spring.web;
 
-    opens red.jackal.training.spring.jpms.web to spring.core, spring.beans, spring.context;
+    exports red.jackal.training.spring.jpms.web.controller;
+
     opens red.jackal.training.spring.jpms.web.controller to spring.beans, spring.web;
 }
