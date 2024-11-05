@@ -1,11 +1,11 @@
 package red.jackal.training.spring.jpms.service.impl;
 
-import red.jackal.training.spring.jpms.entity.ExampleEntity;
-import red.jackal.training.spring.jpms.repository.ExampleRepository;
+import red.jackal.training.spring.jpms.api.ExampleData;
+import red.jackal.training.spring.jpms.api.ExampleRepository;
 import red.jackal.training.spring.jpms.service.ExampleService;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 public class DefaultExampleService implements ExampleService {
 
@@ -16,19 +16,27 @@ public class DefaultExampleService implements ExampleService {
     }
 
     @Override
-    public Optional<ExampleEntity> getExample(long id) {
-        return exampleRepository.findById(id);
+    public ExampleData getExample(long id) {
+        return exampleRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Example with id %s not found".formatted(id)));
     }
 
     @Override
-    public List<ExampleEntity> getAllExamples() {
+    public List<ExampleData> getAllExamples() {
         return exampleRepository.findAll();
     }
 
     @Override
-    public ExampleEntity addExample(String name) {
-        ExampleEntity exampleEntity = new ExampleEntity();
-        exampleEntity.setName(name);
-        return exampleRepository.save(exampleEntity);
+    public ExampleData addExample(String name) {
+        return exampleRepository.save(new ExampleData() {
+            @Override
+            public Long id() {
+                throw new UnsupportedOperationException("ID is forbidden");
+            }
+
+            @Override
+            public String name() {
+                return name;
+            }
+        });
     }
 }

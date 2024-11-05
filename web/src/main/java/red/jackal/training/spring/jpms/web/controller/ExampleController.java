@@ -3,15 +3,16 @@ package red.jackal.training.spring.jpms.web.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import red.jackal.training.spring.jpms.entity.ExampleEntity;
+import red.jackal.training.spring.jpms.api.ExampleData;
 import red.jackal.training.spring.jpms.service.ExampleService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/example")
+@RequestMapping("/v1/examples")
 public class ExampleController {
 
     private final ExampleService exampleService;
@@ -20,18 +21,18 @@ public class ExampleController {
         this.exampleService = exampleService;
     }
 
-    @GetMapping("/{id}")
-    public ExampleEntity getExample(@PathVariable Long id) {
-        return exampleService.getExample(id).orElse(null);
-    }
-
-    @GetMapping("/all")
-    public List<ExampleEntity> getAllExamples() {
+    @GetMapping("/")
+    public List<ExampleData> getAllExamples() {
         return exampleService.getAllExamples();
     }
 
-    @PostMapping("/add/{name}")
-    public ExampleEntity addExample(@PathVariable String name) {
-        return exampleService.addExample(name);
+    @PostMapping("/")
+    public ExampleData addExample(@RequestBody SaveExampleRequest request) {
+        return exampleService.addExample(request.name());
+    }
+
+    @GetMapping("/{id}")
+    public ExampleData getExample(@PathVariable Long id) {
+        return exampleService.getExample(id);
     }
 }

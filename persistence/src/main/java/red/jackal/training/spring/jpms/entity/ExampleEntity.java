@@ -4,10 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import red.jackal.training.spring.jpms.api.ExampleData;
+
 import java.io.Serializable;
 
 @Entity
-public class ExampleEntity implements Serializable {
+public class ExampleEntity implements ExampleData, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,19 +17,25 @@ public class ExampleEntity implements Serializable {
 
     private String name;
 
-    public Long getId() {
+    public ExampleEntity() {
+        //For JPA
+    }
+
+    public ExampleEntity(String name) {
+        this.name = name;
+    }
+
+    public ExampleEntity(ExampleData exampleData) {
+        this(exampleData.name());
+    }
+
+    public Long id() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
+    @Override
+    public String name() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }

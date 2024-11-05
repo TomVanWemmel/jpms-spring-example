@@ -1,14 +1,13 @@
 package red.jackal.training.spring.jpms.service;
 
-import red.jackal.training.spring.jpms.entity.ExampleEntity;
+import red.jackal.training.spring.jpms.api.ExampleData;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ExampleService {
-    Optional<ExampleEntity> getExample(long id);
+    ExampleData getExample(long id);
 
-    List<ExampleEntity> getAllExamples();
+    List<ExampleData> getAllExamples();
 
-    ExampleEntity addExample(String name);
+    ExampleData addExample(String name);
 }

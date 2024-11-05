@@ -8,7 +8,8 @@ module example.web {
     requires spring.web;
     requires spring.context;
 
+    exports red.jackal.training.spring.jpms.web to example.app;
     exports red.jackal.training.spring.jpms.web.controller;
 
-    opens red.jackal.training.spring.jpms.web.controller to spring.beans, spring.web;
+    opens red.jackal.training.spring.jpms.web to spring.beans, spring.web;
 }

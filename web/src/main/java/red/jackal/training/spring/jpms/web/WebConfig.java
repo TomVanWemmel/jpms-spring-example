@@ -1,4 +1,4 @@
-package red.jackal.training.spring.jpms.web.config;
+package red.jackal.training.spring.jpms.web;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
